@@ -1,0 +1,73 @@
+Thunell et al. IGP Model implementation in Matcont
+--------------------------------------------------
+
+Name: IGP_Mod10Temp
+
+Coordinates: Rc,Pj,Pa,Cs
+
+Parameters: del,K,I_P,I_Cs,M_Cs,M_P,d_Cs,d_P,Hc,Hp,ap,ac,z,T,T0,beta,k,rE,KE,ME,Eri,Eru,omb,oma,dum
+
+Time: t
+
+r_del = exp(rE*(T-T0)/(k*T*T0))
+r_K = exp(KE*(T-T0)/(k*T*T0))
+r_i = exp(ME*Eri*(T-T0)/(k*T*T0))
+r_u = exp(ME*Eru*(T-T0)/(k*T*T0))
+r_m = exp(ME*(T-T0)/(k*T*T0))
+
+om = oma + omb*(T-T0)
+Int_Cs   = (I_Cs*Rc / (Hc + Rc))*r_i
+Int_Pj   = (I_P*Rc / (Hp + Rc))*r_i
+Int_Pa_Rc= (I_P*om*beta*Rc / (Hp + beta*Rc + (1-beta)*Cs))*r_i
+Int_Pa_Cs= (I_P*om*(1-beta)*Cs / (Hp + beta*Rc + (1-beta)*Cs))*r_i
+
+Nu_Cs = ac*Int_Cs - M_Cs*r_m
+Nu_Pj = ap*Int_Pj - M_P*r_m
+Nu_Pa = ap*Int_Pa_Rc + ap*Int_Pa_Cs - M_P*r_m
+
+u_P = r_u*d_P
+u_Cs = r_u*d_Cs
+
+if(Nu_Pj>0), Nu_p_Pj=Nu_Pj, else Nu_p_Pj=0, end
+if(Nu_Pa>0), Nu_p_Pa=Nu_Pa, else Nu_p_Pa=0, end
+if(Nu_Cs>0), Nu_Cs=Nu_Cs, else Nu_Cs=0, end
+tolzero = 1.0E-12
+if(Nu_Pj>0), matexp = 1 - u_P(1) / Nu_Pj(1); matswitch = heaviside(tolzero - matexp) * heaviside(matexp + tolzero); matnum = (1.0 - matswitch) * (Nu_Pj(1) - u_P(1)) + matswitch * u_P(1); matden = (1.0 - matswitch) * (1.0 - z ^ (1.0 - u_P(1) / Nu_Pj(1))) - matswitch * log(z); mat_rate = heaviside(Nu_Pj(1)) * matnum / matden, else mat_rate=0, end
+
+Rc' = del*r_del*(K*r_K-Rc) - Int_Cs*Cs - Int_Pj*Pj - Int_Pa_Rc*Pa
+Pj' = Nu_p_Pa*Pa + Nu_Pj*Pj - mat_rate*Pj - u_P*Pj
+Pa' = mat_rate*Pj + Nu_Pa*Pa - Nu_p_Pa*Pa - u_P*Pa + dum
+Cs' = Nu_Cs*Cs - u_Cs*Cs - Int_Pa_Cs*Pa
+
+
+------------------
+User functions: Name Label
+
+matrate mr
+res=(ac*(I_P*Rc / (Hp + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0)) - M_P*exp(ME*(T-T0)/(k*T*T0)) - (exp(ME*Eru*(T-T0)/(k*T*T0))*d_P)) / (1-z ^ (1 -(exp(ME*Eru*(T-T0)/(k*T*T0))*d_P) / (ac*(I_P*Rc / (Hp + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0)) - M_P*exp(ME*(T-T0)/(k*T*T0)))))
+
+reprate rr
+res=ap*(I_P*beta*Rc / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))*(omb*(T-T0)+oma) + ac*(I_P*(1-beta)*Cs / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))*(omb*(T-T0)+oma) - M_P*exp(ME*(T-T0)/(k*T*T0))
+
+BmpCs BC
+res=ac*(I_Cs*Rc/(Hc + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0))-M_Cs*exp(ME*(T-T0)/(k*T*T0))
+
+BmpPj BJ
+res=ac*(I_P*Rc/(Hp + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0))-M_P*exp(ME*(T-T0)/(k*T*T0))
+
+BmpPa BA
+res=ac*(I_P*beta*Rc / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))+ap*(I_P*(1-beta)*Cs / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))*(omb*(T-T0)+oma)-M_P*exp(ME*(T-T0)/(k*T*T0))
+
+IngPaC AC
+res=(I_P*(1-beta)*Cs / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))*(omb*(T-T0)+oma)
+
+IngPar AR
+res=(I_P*beta*Rc / (Hp + beta*Rc + (1-beta)*Cs))*exp(ME*Eri*(T-T0)/(k*T*T0))*(omb*(T-T0)+oma)
+
+IngPjR JR
+res=(I_P*Rc/(Hp + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0))
+
+IngCsR
+res=(I_Cs*Rc / (Hc + Rc))*exp(ME*Eri*(T-T0)/(k*T*T0))
+
+
