@@ -8,4 +8,4 @@ The data is .mat files produced when doing continuations in MatCont. If you wish
 
 https://sourceforge.net/projects/matcont/files/Documentation/ManualAug2011.pdf/download
 
-Comments in plotting code..
+Comments in plotting code...

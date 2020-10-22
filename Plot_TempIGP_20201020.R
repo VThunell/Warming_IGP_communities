@@ -1,11 +1,11 @@
 
 
-#### CREATE PLOTS FROM MATCONT DATA FOR THUNELL MS1 ######################################
+#### CREATE PLOTS FROM MATCONT DATA FOR THUNELL et al. ######
+### Warming effects on intraguild predation communities #####
   
 #.libPaths("//storage-og.slu.se/home$/vitl0001/My Documents/R/win-library/3.5")
-.libPaths("C:/Program Files/R/R-3.5.0/library")
+#.libPaths("C:/Program Files/R/R-3.5.0/library")
 .libPaths()
-#Sys.getenv("R_LIBS_USER")
 
 
 setwd("~/MATLAB/matcont6p6/matcont6p6/Systems/IGP_mod10Temp")
