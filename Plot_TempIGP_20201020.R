@@ -125,7 +125,7 @@ PCRcyclic_long_filt <-
   filter(cyc_minmax < 4) %>%
   filter(Temp < 305 & Temp > 280)
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_Fig1.pdf", width = 8, height = 3.5)
+pdf("MS1_Fig1.pdf", width = 8, height = 3.5)
 ggplot() +
   geom_line(EP_Tx_long_filt, size=0.7, mapping = aes(T, eq_bmd, color = D, linetype = D)) +
   geom_point(PCRcyclic_long_filt, shape = 15, stroke = 0, size = 0.5, mapping = aes(Temp, cyc_minmax, shape=a)) +
@@ -190,7 +190,7 @@ Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
 str(EP_Tx_b015_long)
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_Fig3.pdf", width = 8, height = 3.5)
+pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
 EP_Tx_b015_long %>%
   filter(T < 305 & T > 274) %>%
   filter(eq_bmd >= 0 ) %>%
@@ -424,11 +424,11 @@ empty <- UF_both_long %>%
         #axis.text = element_blank()
   )
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_Fig2.pdf", width = 8, height = 6)
+pdf("MS1_Fig2.pdf", width = 8, height = 6)
 (bmp|irp|mrp)/(bmms|irms|empty)
 dev.off()
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_legendFig2.pdf", width = 7, height = 6)
+pdf("MS1_legendFig2.pdf", width = 7, height = 6)
 ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
   geom_path(size=0.7) +
   theme(legend.text = element_text(size = 8),
@@ -522,7 +522,7 @@ colnames(Ip) <- c("T","Beta")
 str(Ip)
 
 # beta-Temp plot
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_Fig4.pdf", width = 5, height = 4)
+pdf("MS1_Fig4.pdf", width = 5, height = 4)
 defx %>% 
   filter(T < 305 && T > 274) %>%
   ggplot(.) + 
@@ -594,7 +594,7 @@ str(intake)
 intake_long <- gather(intake, key = "coord", value = "rate",1:3)#, eq_bmd, Pa, Pj, C, R) #long format 
 str(intake_long)
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_AppendixA1.pdf", width = 5, height = 3)
+pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
 intake_long %>%
   #filter(coord != "") %>%
   #filter(T < 310 & T > 274)%>%
@@ -697,7 +697,7 @@ A3_df_long$Sce_f = factor(A3_df_long$Sce, levels=c('Null','Delta','DeltaAndK','N
 str(A3_df_long)
 
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
+pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
 A3_df_long %>%
   filter(T > 275) %>%
   filter(D != "Cyc") %>%
@@ -881,7 +881,7 @@ mrr_UF <-  A3_UF_both_long %>%
         legend.key = element_rect(fill = "transparent")
 )
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_AppendixA3_2.pdf", width = 8, height = 6)
+pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
 bmp_UF|irp_UF|mrr_UF
 dev.off()
 
@@ -954,7 +954,7 @@ mrrx_UF <- A3_UF_both_long %>%
         axis.title.y = element_blank()
 )
 
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_AppendixA3_3.pdf", width = 8, height = 6)
+pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
 bmms_UF|irms_UF
 dev.off()
 
@@ -1011,7 +1011,7 @@ colnames(Ip_ICs15) <- c("T","Beta")
 str(Ip)
 
 # beta-Temp plot
-pdf("\\\\storage-og.slu.se/home$/vitl0001/Desktop/MS1_AppendixA3.pdf.pdf", width = 5, height = 4)
+pdf("MS1_AppendixA3.pdf", width = 5, height = 4)
 ICs15x %>% 
   filter(T < 305 && T > 274) %>%
   ggplot(.) + 
