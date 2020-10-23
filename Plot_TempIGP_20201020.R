@@ -1,14 +1,10 @@
 
-
 #### CREATE PLOTS FROM MATCONT DATA FOR THUNELL et al. ######
 ### Warming effects on intraguild predation communities #####
   
-#.libPaths("//storage-og.slu.se/home$/vitl0001/My Documents/R/win-library/3.5")
-#.libPaths("C:/Program Files/R/R-3.5.0/library")
-.libPaths()
-
-
-setwd("~/MATLAB/matcont6p6/matcont6p6/Systems/IGP_mod10Temp")
+# Either download the data from or start a new version control project with 
+# Viktor Thunells GitHub repository Warming_IGP_communities using the URL
+# https://github.com/VThunell/Warming_IGP_communities/tree/master/Data
 
 library(R.matlab)
 library(tidyverse)
@@ -16,14 +12,13 @@ library(patchwork)
 library(RColorBrewer)
 library(grid)
 
-
 #### Figure 1 Plot equilibrium biomass over Temp with Min and max of amplitudes for cyclic region ######
 
-# Import Data for default scenario, i.e. Fig. 1 & 2
-EP_T1 <- readMat("default/EP_T_default(1).mat")
-EP_T2 <- readMat("default/EP_T_default(2).mat")
-EP_T3 <- readMat("default/EP_T_default_ASS(1).mat")
-EP_T4 <- readMat("default/EP_T_default_ASS(2).mat")
+# Import Data for default scenario, Fig. 1 & 2
+EP_T1 <- readMat("Data/default/EP_T_default(1).mat")
+EP_T2 <- readMat("Data/default/EP_T_default(2).mat")
+EP_T3 <- readMat("Data/default/EP_T_default_ASS(1).mat")
+EP_T4 <- readMat("Data/default/EP_T_default_ASS(2).mat")
 
 # Create a column indicating dynamic stability based on eigenvalues in Matcont f and s table
 EP_Tx1 <- as.data.frame(t(cbind(EP_T1$x, EP_T2$x))) # the stable and unstable coexistence
@@ -47,67 +42,67 @@ str(EP_Tx_long)
 Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
-PCRcyclic280  <- readMat("default/P_280.mat")
+PCRcyclic280  <- readMat("Data/default/P_280.mat")
 PCRcyclic280 <- as.data.frame(cbind(t(PCRcyclic280$x[1:4,]), PCRcyclic280$t[,1]))
 PCRcyclic280 <- as.data.frame(PCRcyclic280[which(PCRcyclic280[,5] >= 4000), ])
 PCRcyclic280 <- cbind(rbind(apply(PCRcyclic280[,1:4],2,min), apply(PCRcyclic280[,1:4],2,max)), c(280,280))
 colnames(PCRcyclic280) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic281  <- readMat("default/P_281.mat")
+PCRcyclic281  <- readMat("Data/default/P_281.mat")
 PCRcyclic281 <- as.data.frame(cbind(t(PCRcyclic281$x[1:4,]), PCRcyclic281$t[,1]))
 PCRcyclic281 <- as.data.frame(PCRcyclic281[which(PCRcyclic281[,5] >= 4000), ])
 PCRcyclic281 <- cbind(rbind(apply(PCRcyclic281[,1:4],2,min), apply(PCRcyclic281[,1:4],2,max)), c(281,281))
 colnames(PCRcyclic281) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic282  <- readMat("default/P_282.mat")
+PCRcyclic282  <- readMat("Data/default/P_282.mat")
 PCRcyclic282 <- as.data.frame(cbind(t(PCRcyclic282$x[1:4,]), PCRcyclic282$t[,1]))
 PCRcyclic282 <- as.data.frame(PCRcyclic282[which(PCRcyclic282[,5] >= 4000), ])
 PCRcyclic282 <- cbind(rbind(apply(PCRcyclic282[,1:4],2,min), apply(PCRcyclic282[,1:4],2,max)), c(282,282))
 colnames(PCRcyclic282) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic283  <- readMat("default/P_283.mat")
+PCRcyclic283  <- readMat("Data/default/P_283.mat")
 PCRcyclic283 <- as.data.frame(cbind(t(PCRcyclic283$x[1:4,]), PCRcyclic283$t[,1]))
 PCRcyclic283 <- as.data.frame(PCRcyclic283[which(PCRcyclic283[,5] >= 4000), ])
 PCRcyclic283 <- cbind(rbind(apply(PCRcyclic283[,1:4],2,min), apply(PCRcyclic283[,1:4],2,max)), c(283,283))
 colnames(PCRcyclic283) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic284  <- readMat("default/P_284.mat")
+PCRcyclic284  <- readMat("Data/default/P_284.mat")
 PCRcyclic284 <- as.data.frame(cbind(t(PCRcyclic284$x[1:4,]), PCRcyclic284$t[,1]))
 PCRcyclic284 <- as.data.frame(PCRcyclic284[which(PCRcyclic284[,5] >= 4000), ])
 PCRcyclic284 <- cbind(rbind(apply(PCRcyclic284[,1:4],2,min), apply(PCRcyclic284[,1:4],2,max)), c(284,284))
 colnames(PCRcyclic284) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic285  <- readMat("default/P_285.mat")
+PCRcyclic285  <- readMat("Data/default/P_285.mat")
 PCRcyclic285 <- as.data.frame(cbind(t(PCRcyclic285$x[1:4,]), PCRcyclic285$t[,1]))
 PCRcyclic285 <- as.data.frame(PCRcyclic285[which(PCRcyclic285[,5] >= 4000), ])
 PCRcyclic285 <- cbind(rbind(apply(PCRcyclic285[,1:4],2,min), apply(PCRcyclic285[,1:4],2,max)), c(285,285))
 colnames(PCRcyclic285) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic286  <- readMat("default/P_286.mat")
+PCRcyclic286  <- readMat("Data/default/P_286.mat")
 PCRcyclic286 <- as.data.frame(cbind(t(PCRcyclic286$x[1:4,]), PCRcyclic286$t[,1]))
 PCRcyclic286 <- as.data.frame(PCRcyclic286[which(PCRcyclic286[,5] >= 4000), ])
 PCRcyclic286 <- cbind(rbind(apply(PCRcyclic286[,1:4],2,min), apply(PCRcyclic286[,1:4],2,max)), c(286,286))
 colnames(PCRcyclic286) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic287  <- readMat("default/P_287.mat")
+PCRcyclic287  <- readMat("Data/default/P_287.mat")
 PCRcyclic287 <- as.data.frame(cbind(t(PCRcyclic287$x[1:4,]), PCRcyclic287$t[,1]))
 PCRcyclic287 <- as.data.frame(PCRcyclic287[which(PCRcyclic287[,5] >= 4000), ])
 PCRcyclic287 <- cbind(rbind(apply(PCRcyclic287[,1:4],2,min), apply(PCRcyclic287[,1:4],2,max)), c(287,287))
 colnames(PCRcyclic287) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic288  <- readMat("default/P_288.mat")
+PCRcyclic288  <- readMat("Data/default/P_288.mat")
 PCRcyclic288 <- as.data.frame(cbind(t(PCRcyclic288$x[1:4,]), PCRcyclic288$t[,1]))
 PCRcyclic288 <- as.data.frame(PCRcyclic288[which(PCRcyclic288[,5] >= 4000), ])
 PCRcyclic288 <- cbind(rbind(apply(PCRcyclic288[,1:4],2,min), apply(PCRcyclic288[,1:4],2,max)), c(288,288))
 colnames(PCRcyclic288) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic289  <- readMat("default/P_289.mat")
+PCRcyclic289  <- readMat("Data/default/P_289.mat")
 PCRcyclic289 <- as.data.frame(cbind(t(PCRcyclic289$x[1:4,]), PCRcyclic289$t[,1]))
 PCRcyclic289 <- as.data.frame(PCRcyclic289[which(PCRcyclic289[,5] >= 4000), ])
 PCRcyclic289 <- cbind(rbind(apply(PCRcyclic289[,1:4],2,min), apply(PCRcyclic289[,1:4],2,max)), c(289,289))
 colnames(PCRcyclic289) <- c("R","Pj","Pa","C","Temp")
 
-PCRcyclic290  <- readMat("default/P_290.mat")
+PCRcyclic290  <- readMat("Data/default/P_290.mat")
 PCRcyclic290 <- as.data.frame(cbind(t(PCRcyclic290$x[1:4,]), PCRcyclic290$t[,1]))
 PCRcyclic290 <- as.data.frame(PCRcyclic290[which(PCRcyclic290[,5] >= 4000), ])
 PCRcyclic290 <- cbind(rbind(apply(PCRcyclic290[,1:4],2,min), apply(PCRcyclic290[,1:4],2,max)), c(290,290))
@@ -158,12 +153,12 @@ dev.off()
 #### Figure 3 Plot equilibrium biomass over T, beta = 0.15  ##########
 
 # import
-EP_T1_b015 <- readMat("beta015/EP_T_beta015_PCR(1).mat")
-EP_T2_b015 <- readMat("beta015/EP_T_beta015_PCR(2).mat")
-EP_T3_b015 <- readMat("beta015/BP_T_beta015_uns_PR(1).mat")
-#EP_T4_b015 <- readMat("beta015/BP_T_beta015_PR_to_CR(1).mat") #unstable R-state connecting PR wwith CR
-EP_T5_b015 <- readMat("beta015/BP_T_beta015_PR(2).mat")
-EP_T6_b015 <- readMat("beta015/BP_T_beta015_CR(2).mat")
+EP_T1_b015 <- readMat("Data/beta015/EP_T_beta015_PCR(1).mat")
+EP_T2_b015 <- readMat("Data/beta015/EP_T_beta015_PCR(2).mat")
+EP_T3_b015 <- readMat("Data/beta015/BP_T_beta015_uns_PR(1).mat")
+#EP_T4_b015 <- readMat("Data/beta015/BP_T_beta015_PR_to_CR(1).mat") #unstable R-state connecting PR wwith CR
+EP_T5_b015 <- readMat("Data/beta015/BP_T_beta015_PR(2).mat")
+EP_T6_b015 <- readMat("Data/beta015/BP_T_beta015_CR(2).mat")
 
 # create a column indicating dynamic stability
 EP_T2b_b015 <- t(EP_T2_b015$x) #the order of the data needs to be right for the geom_path not to close its line
@@ -227,8 +222,8 @@ dev.off()
 
 #### Figure 2 Plot rate in user functions over T, default parameter values excluding cyclic region #######################
 
-UF_T1 <- readMat("default/EP_T_default(1).mat")
-UF_T2 <- readMat("default/EP_T_default(2).mat")
+UF_T1 <- readMat("Data/default/EP_T_default(1).mat")
+UF_T2 <- readMat("Data/default/EP_T_default(2).mat")
 
 # The .mat h rows correspond to user functions (* multiplies with coordinate for population level biomass rate,  rownumber in UF_T, see next # create..)
 #3.	 mat – mr     (*Pj, 1)
@@ -451,42 +446,42 @@ dev.off()
 ### Figure 4 Plot community composition over T and beta ############
 
 #Import and fix data for the PCR line
-PCRLP_def  <- readMat("default/LP_LP_TBeta_default(1).mat")
+PCRLP_def  <- readMat("Data/default/LP_LP_TBeta_default(1).mat")
 PCRLP_defx <- as.data.frame(t(PCRLP_def$x[5:6,]))
 PCRLP_defx["Bf"] <- "PCR"
-PCR5_def <- readMat("default/BP_LP_TBeta_default(5).mat")
+PCR5_def <- readMat("Data/default/BP_LP_TBeta_default(5).mat")
 PCR5_defx <- as.data.frame(t(PCR5_def$x[5:6,]))
 PCR5_defx["Bf"] <- "PCR"
 PCR5_defx <- head(PCR5_defx, -6)
-PCR6_def <- readMat("default/BP_LP_TBeta_default(6).mat")
+PCR6_def <- readMat("Data/default/BP_LP_TBeta_default(6).mat")
 PCR6_defx <- as.data.frame(t(PCR6_def$x[5:6,]))
 PCR6_defx["Bf"] <- "PCR"
-PCR1_def <- readMat("default/BP_LP_TBeta_default(1).mat")
+PCR1_def <- readMat("Data/default/BP_LP_TBeta_default(1).mat")
 PCR1_defx <- as.data.frame(t(PCR1_def$x[5:6,]))
 PCR1_defx["Bf"] <- "PCR"
-PCR2_def <- readMat("default/BP_LP_TBeta_default(2).mat")
+PCR2_def <- readMat("Data/default/BP_LP_TBeta_default(2).mat")
 PCR2_defx <- as.data.frame(t(PCR2_def$x[5:6,]))
 PCR2_defx["Bf"] <- "PCR"
 
 
 #Import and fix data for the PR line
-PR4_def <- readMat("default/BP_LP_TBeta_default(4).mat")
+PR4_def <- readMat("Data/default/BP_LP_TBeta_default(4).mat")
 PR4_defx <- as.data.frame(t(PR4_def$x[5:6,]))
 PR4_defx["Bf"] <- "PR"
-PR3_def <- readMat("default/BP_LP_TBeta_default(3).mat")
+PR3_def <- readMat("Data/default/BP_LP_TBeta_default(3).mat")
 PR3_defx <- as.data.frame(t(PR3_def$x[5:6,]))
 PR3_defx["Bf"] <- "PR"
-PR5_def <- readMat("default/BP_LP_TBeta_default(5).mat")
+PR5_def <- readMat("Data/default/BP_LP_TBeta_default(5).mat")
 PR5_defx <- as.data.frame(t(PR5_def$x[5:6,]))
 PR5_defx["Bf"] <- "PR"
 PR5_defx <- head(PR5_defx, -6)
-PR6_def <- readMat("default/BP_LP_TBeta_default(6).mat")
+PR6_def <- readMat("Data/default/BP_LP_TBeta_default(6).mat")
 PR6_defx <- as.data.frame(t(PR6_def$x[5:6,]))
 PR6_defx["Bf"] <- "PR"
-PR1_def <- readMat("default/BP_LP_TBeta_default(1).mat")
+PR1_def <- readMat("Data/default/BP_LP_TBeta_default(1).mat")
 PR1_defx <- as.data.frame(t(PR1_def$x[5:6,]))
 PR1_defx["Bf"] <- "PR"
-PR2_def <- readMat("default/BP_LP_TBeta_default(2).mat")
+PR2_def <- readMat("Data/default/BP_LP_TBeta_default(2).mat")
 PR2_defx <- as.data.frame(t(PR2_def$x[5:6,]))
 PR2_defx["Bf"] <- "PR"
 
@@ -519,8 +514,8 @@ defx <- rbind(defx,CR1_defx,PCRPR_defx)
 defx$Bf <- factor(defx$Bf, levels = c("CR", "PR", "PCR","PCRPR"))
 
 # fix the Ip line 
-Ip1 <- readMat("default/BP_BP_TBeta_PreInv(1).mat")
-Ip2 <- readMat("default/BP_BP_TBeta_PreInv(2).mat")
+Ip1 <- readMat("Data/default/BP_BP_TBeta_PreInv(1).mat")
+Ip2 <- readMat("Data/default/BP_BP_TBeta_PreInv(2).mat")
 #PR6_defx <- as.data.frame(t(PR6_def$x[5:6,]))
 Ip <- as.data.frame(rbind(t(Ip1$x[5:6,]),t(Ip2$x[5:6,]))) # the stable and unstable coexistence
 colnames(Ip) <- c("T","Beta")
@@ -625,8 +620,8 @@ dev.off()
 # Default: with omegab =-0.05. default 
 
 #Null:
-Null_1 <- readMat("default/EP_T_rEA_0.6_notempeffect(1).mat") #292 < T and ustable
-Null_2 <- readMat("default/EP_T_rEA_0.6_notempeffect(2).mat") #292 > T
+Null_1 <- readMat("Data/default/EP_T_rEA_0.6_notempeffect(1).mat") #292 < T and ustable
+Null_2 <- readMat("Data/default/EP_T_rEA_0.6_notempeffect(2).mat") #292 > T
 
 Null_x <- as.data.frame(t(cbind(Null_1$x, Null_2$x)))
 Null_x["D"] <- "S1" # set all values to stable PCR state
@@ -637,8 +632,8 @@ colnames(Null_x) <- c("R","Pj","Pa","C","T","D","Sce")
 str(Null_x)
 
 #Only delta 0.4
-Delta_1 <- readMat("default/EP_T_rEA_0.4_deltaonly(1).mat") # 292 > T
-Delta_2 <- readMat("default/EP_T_rEA_0.4_deltaonly(2).mat") # 292 < T and unstable
+Delta_1 <- readMat("Data/default/EP_T_rEA_0.4_deltaonly(1).mat") # 292 > T
+Delta_2 <- readMat("Data/default/EP_T_rEA_0.4_deltaonly(2).mat") # 292 < T and unstable
 
 Delta_x <- as.data.frame(t(cbind(Delta_1$x, Delta_2$x))) # the stable and unstable coexistence
 Delta_x["D"] <- "S1"                                         # set all values to stable PCR state
@@ -651,8 +646,8 @@ colnames(Delta_x) <- c("R","Pj","Pa","C","T","D","Sce")
 str(Delta_x)
 
 # Delta & K
-DeltaAndK_1 <- readMat("default/EP_T_rEA_04_KEA_-04_muEA_06(1).mat") #292 > T
-DeltaAndK_2 <- readMat("default/EP_T_rEA_04_KEA_-04_muEA_06(2).mat") #292 < T and ustable
+DeltaAndK_1 <- readMat("Data/default/EP_T_rEA_04_KEA_-04_muEA_06(1).mat") #292 > T
+DeltaAndK_2 <- readMat("Data/default/EP_T_rEA_04_KEA_-04_muEA_06(2).mat") #292 < T and ustable
 
 DeltaAndK_x <- as.data.frame(t(cbind(DeltaAndK_1$x, DeltaAndK_2$x))) # the stable and unstable coexistence
 DeltaAndK_x["D"] <- "S1"                                         # set all values to stable PCR state
@@ -665,8 +660,8 @@ colnames(DeltaAndK_x) <- c("R","Pj","Pa","C","T","D","Sce")
 str(DeltaAndK_x)
 
 # NoTMort 
-NoTMort_1 <- readMat("default/EP_T_mort0(1).mat") #292 < T and ustable
-NoTMort_2 <- readMat("default/EP_T_mort0(2).mat") #292 > T
+NoTMort_1 <- readMat("Data/default/EP_T_mort0(1).mat") #292 < T and ustable
+NoTMort_2 <- readMat("Data/default/EP_T_mort0(2).mat") #292 > T
 
 NoTMort_x <- as.data.frame(t(cbind(NoTMort_2$x[,1:240], NoTMort_1$x))) # the stable and unstable coexistence, remove temps below ca. 270 K so that the 1 and 2 curves dont overlap
 NoTMort_x["D"] <- "S1"                                         # set all values to stable PCR state
@@ -679,8 +674,8 @@ colnames(NoTMort_x) <- c("R","Pj","Pa","C","T","D","Sce")
 str(NoTMort_x)
 
 # Default 
-EP_T1 <- readMat("default/EP_T_default(1).mat")
-EP_T2 <- readMat("default/EP_T_default(2).mat")
+EP_T1 <- readMat("Data/default/EP_T_default(1).mat")
+EP_T2 <- readMat("Data/default/EP_T_default(2).mat")
 
 # create a column indicating dynamic stability
 Default_x <- as.data.frame(t(cbind(EP_T1$x, EP_T2$x))) # the stable and unstable coexistence
@@ -967,19 +962,19 @@ dev.off()
 ### APPENDIX A4, Plot community composition over T and beta, I_Cs = 15 ####
 
 #Import and fix data for the PCR line
-PCRLP_ICs15  <- readMat("I_Cs_15/LP_LP_predaExclu(1).mat")
+PCRLP_ICs15  <- readMat("Data/I_Cs_15/LP_LP_predaExclu(1).mat")
 PCRLP_ICs15x <- as.data.frame(t(PCRLP_ICs15$x[5:6,]))
 PCRLP_ICs15x["Bf"] <- "PCR"
-PCR_ICs15 <- readMat("I_Cs_15/BP_LP_conInva(2).mat")
+PCR_ICs15 <- readMat("Data/I_Cs_15/BP_LP_conInva(2).mat")
 PCR_ICs15x <- as.data.frame(t(PCR_ICs15$x[5:6,])) 
 PCR_ICs15x <- PCR_ICs15x[which(PCR_ICs15x[,1] <= min(PCRLP_ICs15x[,1])),]
 PCR_ICs15x["Bf"] <- "PCR"
 
 #Import and fix data for the PR line
-PR1_ICs15 <- readMat("I_Cs_15/BP_LP_conInva(1).mat")
+PR1_ICs15 <- readMat("Data/I_Cs_15/BP_LP_conInva(1).mat")
 PR1_ICs15x <- as.data.frame(t(PR1_ICs15$x[5:6,]))
 PR1_ICs15x["Bf"] <- "PR"
-PR2_ICs15 <- readMat("I_Cs_15/BP_LP_conInva(2).mat")
+PR2_ICs15 <- readMat("Data/I_Cs_15/BP_LP_conInva(2).mat")
 PR2_ICs15x <- as.data.frame(t(PR2_ICs15$x[5:6,]))
 PR2_ICs15x["Bf"] <- "PR"
 
@@ -1009,8 +1004,8 @@ ICs15x <- rbind(ICs15x,CR1_ICs15x,PCRPR_ICs15x)
 ICs15x$Bf <- factor(ICs15x$Bf, levels = c("CR", "PR", "PCR","PCRPR"))
 
 # fix the Ip line 
-Ip1_ICs15 <- readMat("I_Cs_15/BP_LP_predInva(1).mat")
-Ip2_ICs15 <- readMat("I_Cs_15/BP_LP_predInva(2).mat")
+Ip1_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(1).mat")
+Ip2_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(2).mat")
 Ip_ICs15 <- as.data.frame(rbind(t(Ip1_ICs15$x[5:6,]),t(Ip2_ICs15$x[5:6,]))) # the stable and unstable coexistence
 colnames(Ip_ICs15) <- c("T","Beta")
 str(Ip)
