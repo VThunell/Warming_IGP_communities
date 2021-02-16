@@ -42,93 +42,97 @@ str(EP_Tx_long)
 Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
-PCRcyclic280  <- readMat("Data/default/P_280.mat")
-PCRcyclic280 <- as.data.frame(cbind(t(PCRcyclic280$x[1:4,]), PCRcyclic280$t[,1]))
-PCRcyclic280 <- as.data.frame(PCRcyclic280[which(PCRcyclic280[,5] >= 4000), ])
-PCRcyclic280 <- cbind(rbind(apply(PCRcyclic280[,1:4],2,min), apply(PCRcyclic280[,1:4],2,max)), c(280,280))
-colnames(PCRcyclic280) <- c("R","Pj","Pa","C","Temp")
-
 PCRcyclic281  <- readMat("Data/default/P_281.mat")
 PCRcyclic281 <- as.data.frame(cbind(t(PCRcyclic281$x[1:4,]), PCRcyclic281$t[,1]))
-PCRcyclic281 <- as.data.frame(PCRcyclic281[which(PCRcyclic281[,5] >= 4000), ])
-PCRcyclic281 <- cbind(rbind(apply(PCRcyclic281[,1:4],2,min), apply(PCRcyclic281[,1:4],2,max)), c(281,281))
-colnames(PCRcyclic281) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic281 <- as.data.frame(PCRcyclic281[which(PCRcyclic281[,5] >= 2000), ])
+PCRcyclic281 <- cbind(rbind(apply(PCRcyclic281[,1:4],2,min), apply(PCRcyclic281[,1:4],2,max)), c(281,281),c("min","max"))
+colnames(PCRcyclic281) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic282  <- readMat("Data/default/P_282.mat")
 PCRcyclic282 <- as.data.frame(cbind(t(PCRcyclic282$x[1:4,]), PCRcyclic282$t[,1]))
-PCRcyclic282 <- as.data.frame(PCRcyclic282[which(PCRcyclic282[,5] >= 4000), ])
-PCRcyclic282 <- cbind(rbind(apply(PCRcyclic282[,1:4],2,min), apply(PCRcyclic282[,1:4],2,max)), c(282,282))
-colnames(PCRcyclic282) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic282 <- as.data.frame(PCRcyclic282[which(PCRcyclic282[,5] >= 2000), ])
+PCRcyclic282 <- cbind(rbind(apply(PCRcyclic282[,1:4],2,min), apply(PCRcyclic282[,1:4],2,max)), c(282,282),c("min","max"))
+colnames(PCRcyclic282) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic283  <- readMat("Data/default/P_283.mat")
 PCRcyclic283 <- as.data.frame(cbind(t(PCRcyclic283$x[1:4,]), PCRcyclic283$t[,1]))
-PCRcyclic283 <- as.data.frame(PCRcyclic283[which(PCRcyclic283[,5] >= 4000), ])
-PCRcyclic283 <- cbind(rbind(apply(PCRcyclic283[,1:4],2,min), apply(PCRcyclic283[,1:4],2,max)), c(283,283))
-colnames(PCRcyclic283) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic283 <- as.data.frame(PCRcyclic283[which(PCRcyclic283[,5] >= 2000), ])
+PCRcyclic283 <- cbind(rbind(apply(PCRcyclic283[,1:4],2,min), apply(PCRcyclic283[,1:4],2,max)), c(283,283),c("min","max"))
+colnames(PCRcyclic283) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic284  <- readMat("Data/default/P_284.mat")
 PCRcyclic284 <- as.data.frame(cbind(t(PCRcyclic284$x[1:4,]), PCRcyclic284$t[,1]))
-PCRcyclic284 <- as.data.frame(PCRcyclic284[which(PCRcyclic284[,5] >= 4000), ])
-PCRcyclic284 <- cbind(rbind(apply(PCRcyclic284[,1:4],2,min), apply(PCRcyclic284[,1:4],2,max)), c(284,284))
-colnames(PCRcyclic284) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic284 <- as.data.frame(PCRcyclic284[which(PCRcyclic284[,5] >= 2000), ])
+PCRcyclic284 <- cbind(rbind(apply(PCRcyclic284[,1:4],2,min), apply(PCRcyclic284[,1:4],2,max)), c(284,284),c("min","max"))
+colnames(PCRcyclic284) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic285  <- readMat("Data/default/P_285.mat")
 PCRcyclic285 <- as.data.frame(cbind(t(PCRcyclic285$x[1:4,]), PCRcyclic285$t[,1]))
-PCRcyclic285 <- as.data.frame(PCRcyclic285[which(PCRcyclic285[,5] >= 4000), ])
-PCRcyclic285 <- cbind(rbind(apply(PCRcyclic285[,1:4],2,min), apply(PCRcyclic285[,1:4],2,max)), c(285,285))
-colnames(PCRcyclic285) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic285 <- as.data.frame(PCRcyclic285[which(PCRcyclic285[,5] >= 2000), ])
+PCRcyclic285 <- cbind(rbind(apply(PCRcyclic285[,1:4],2,min), apply(PCRcyclic285[,1:4],2,max)), c(285,285),c("min","max"))
+colnames(PCRcyclic285) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic286  <- readMat("Data/default/P_286.mat")
 PCRcyclic286 <- as.data.frame(cbind(t(PCRcyclic286$x[1:4,]), PCRcyclic286$t[,1]))
-PCRcyclic286 <- as.data.frame(PCRcyclic286[which(PCRcyclic286[,5] >= 4000), ])
-PCRcyclic286 <- cbind(rbind(apply(PCRcyclic286[,1:4],2,min), apply(PCRcyclic286[,1:4],2,max)), c(286,286))
-colnames(PCRcyclic286) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic286 <- as.data.frame(PCRcyclic286[which(PCRcyclic286[,5] >= 2000), ])
+PCRcyclic286 <- cbind(rbind(apply(PCRcyclic286[,1:4],2,min), apply(PCRcyclic286[,1:4],2,max)), c(286,286),c("min","max"))
+colnames(PCRcyclic286) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic287  <- readMat("Data/default/P_287.mat")
 PCRcyclic287 <- as.data.frame(cbind(t(PCRcyclic287$x[1:4,]), PCRcyclic287$t[,1]))
-PCRcyclic287 <- as.data.frame(PCRcyclic287[which(PCRcyclic287[,5] >= 4000), ])
-PCRcyclic287 <- cbind(rbind(apply(PCRcyclic287[,1:4],2,min), apply(PCRcyclic287[,1:4],2,max)), c(287,287))
-colnames(PCRcyclic287) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic287 <- as.data.frame(PCRcyclic287[which(PCRcyclic287[,5] >= 2000), ])
+PCRcyclic287 <- cbind(rbind(apply(PCRcyclic287[,1:4],2,min), apply(PCRcyclic287[,1:4],2,max)), c(287,287),c("min","max"))
+colnames(PCRcyclic287) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic288  <- readMat("Data/default/P_288.mat")
 PCRcyclic288 <- as.data.frame(cbind(t(PCRcyclic288$x[1:4,]), PCRcyclic288$t[,1]))
-PCRcyclic288 <- as.data.frame(PCRcyclic288[which(PCRcyclic288[,5] >= 4000), ])
-PCRcyclic288 <- cbind(rbind(apply(PCRcyclic288[,1:4],2,min), apply(PCRcyclic288[,1:4],2,max)), c(288,288))
-colnames(PCRcyclic288) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic288 <- as.data.frame(PCRcyclic288[which(PCRcyclic288[,5] >= 2000), ])
+PCRcyclic288 <- cbind(rbind(apply(PCRcyclic288[,1:4],2,min), apply(PCRcyclic288[,1:4],2,max)), c(288,288),c("min","max"))
+colnames(PCRcyclic288) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic289  <- readMat("Data/default/P_289.mat")
 PCRcyclic289 <- as.data.frame(cbind(t(PCRcyclic289$x[1:4,]), PCRcyclic289$t[,1]))
-PCRcyclic289 <- as.data.frame(PCRcyclic289[which(PCRcyclic289[,5] >= 4000), ])
-PCRcyclic289 <- cbind(rbind(apply(PCRcyclic289[,1:4],2,min), apply(PCRcyclic289[,1:4],2,max)), c(289,289))
-colnames(PCRcyclic289) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic289 <- as.data.frame(PCRcyclic289[which(PCRcyclic289[,5] >= 2000), ])
+PCRcyclic289 <- cbind(rbind(apply(PCRcyclic289[,1:4],2,min), apply(PCRcyclic289[,1:4],2,max)), c(289,289), c("min","max"))
+colnames(PCRcyclic289) <- c("R","Pj","Pa","C","Temp","minmax")
 
 PCRcyclic290  <- readMat("Data/default/P_290.mat")
 PCRcyclic290 <- as.data.frame(cbind(t(PCRcyclic290$x[1:4,]), PCRcyclic290$t[,1]))
-PCRcyclic290 <- as.data.frame(PCRcyclic290[which(PCRcyclic290[,5] >= 4000), ])
-PCRcyclic290 <- cbind(rbind(apply(PCRcyclic290[,1:4],2,min), apply(PCRcyclic290[,1:4],2,max)), c(290,290))
-colnames(PCRcyclic290) <- c("R","Pj","Pa","C","Temp")
+PCRcyclic290 <- as.data.frame(PCRcyclic290[which(PCRcyclic290[,5] >= 2000), ])
+PCRcyclic290 <- cbind(rbind(apply(PCRcyclic290[,1:4],2,min), apply(PCRcyclic290[,1:4],2,max)), c(290,290),c("min","max"))
+colnames(PCRcyclic290) <- c("R","Pj","Pa","C","Temp","minmax")
 
-PCRcyclic <- as.data.frame(rbind(PCRcyclic280,PCRcyclic281,PCRcyclic282,PCRcyclic283,
-                                 PCRcyclic284,PCRcyclic285,PCRcyclic286,PCRcyclic287,PCRcyclic288,PCRcyclic289,PCRcyclic290))
+PCRcyclic2904  <- readMat("Data/default/P_2904.mat")
+PCRcyclic2904 <- as.data.frame(cbind(t(PCRcyclic2904$x[1:4,]), PCRcyclic2904$t[,1]))
+PCRcyclic2904 <- as.data.frame(PCRcyclic2904[which(PCRcyclic2904[,5] >= 2000), ])
+PCRcyclic2904 <- cbind(rbind(apply(PCRcyclic2904[,1:4],2,min), apply(PCRcyclic2904[,1:4],2,max)), c(290.4,290.4),c("min","max"))
+colnames(PCRcyclic2904) <- c("R","Pj","Pa","C","Temp","minmax")
+
+PCRcyclic <- as.data.frame(rbind(PCRcyclic281,PCRcyclic282,PCRcyclic283,
+                                 PCRcyclic284,PCRcyclic285,PCRcyclic286,
+                                 PCRcyclic287,PCRcyclic288,PCRcyclic289,
+                                 PCRcyclic290,PCRcyclic2904))
 PCRcyclic["D"]="Cyc"
 PCRcyclic_long <- gather(PCRcyclic, coord_f, cyc_minmax, Pa, Pj, C, R) #long format 
 PCRcyclic_long$coord_f = factor(PCRcyclic_long$coord, levels=c('Pa','Pj','C','R')) # to get coords in the same order of factes as previous plots
+PCRcyclic_long["Temp"] <- as.numeric(unlist(PCRcyclic_long["Temp"]))
+PCRcyclic_long["cyc_minmax"] <- as.numeric(unlist(PCRcyclic_long["cyc_minmax"]))
 
 EP_Tx_long_filt <- 
   EP_Tx_long %>%
-  filter(eq_bmd < 4) %>%
   filter(T < 305 & T > 280) %>%
-  filter(D != "S1" | T > 290.39) # temp at lower Hopf 
+  filter(D != "S1" | T > 290.39) %>% # temp at lower Hopf 
+  mutate(T = T-292)
 
 PCRcyclic_long_filt <- 
   PCRcyclic_long %>%
-  filter(cyc_minmax < 4) %>%
-  filter(Temp < 305 & Temp > 280)
+  filter(Temp < 305 & Temp > 280) %>%
+  mutate(Temp = Temp-292)
 
 pdf("MS1_Fig1.pdf", width = 8, height = 3.5)
 ggplot() +
   geom_line(EP_Tx_long_filt, size=0.7, mapping = aes(T, eq_bmd, color = D, linetype = D)) +
-  geom_point(PCRcyclic_long_filt, shape = 15, stroke = 0, size = 0.5, mapping = aes(Temp, cyc_minmax, shape=a)) +
+  geom_line(PCRcyclic_long_filt, linetype="dotted", size = 0.5, mapping = aes(Temp, cyc_minmax, shape=minmax)) +
   facet_grid(.~coord_f, labeller = labeller(coord_f = Fig1bmd_labs) )+
   ylab(expression(paste("Equilibrium biomass density ")))+ #, "[", g ~V^{-1}, "]"))) +   
   theme(panel.background = element_rect(fill = "white", colour = "black"),
@@ -142,12 +146,14 @@ ggplot() +
         legend.box.background = element_rect(fill = "transparent", colour = "white"),
         strip.text.x = element_text(size = 10)
   ) +
-  ylim(-0.01,3)+ #if 0 at lower ylim the lines for the predator at CR get weird
+  #ylim(-0.01,2.9)+ #if 0 at lower ylim the lines for the predator at CR get weird
+  coord_cartesian(ylim=c(0, 2.5)) +
   scale_linetype_manual(values = c("solid", "solid", "dashed","dotted"), 
                         name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
   scale_color_manual(values = c("#000000", "#999999", "#000000", "#000000"),
                      name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
-  scale_x_continuous("Temperature [K]", limits= c(282,302), breaks = scales::pretty_breaks(n = 6)) 
+  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),  #labels = c("-10","-5",expression(italic("T")["0"]),"5","10"), breaks = c(-10,-5,0,5,10))
+                     limits= c(-10,10), breaks = scales::pretty_breaks(n = 6)) 
 dev.off()
 
 #### Figure 3 Plot equilibrium biomass over T, beta = 0.15  ##########
@@ -298,13 +304,7 @@ bmp <- UF_both_long %>%
         axis.text.x = element_blank(),
         axis.title.x = element_blank(),
         axis.title.y = element_text(size=10)
-        #legend.key = element_rect(fill = "transparent") ,
-        #legend.title = element_blank(),
-        #legend.background = element_rect(fill = "white", colour = "black") ,
-        #legend.position = c(.88, .65),
-        #legend.key.size = unit(.5, "cm"),
-        #legend.text = element_text(size= 8)
-  )
+        )
 
 bmms <- UF_both_long %>%
   filter(UF %in% c("BC","BJ","BA"))  %>%
@@ -1030,4 +1030,44 @@ ICs15x %>%
         legend.title = element_blank(),
         legend.key.size = unit(.4, "cm"),
         legend.text = element_text(size= 8))
+dev.off()
+
+### APPENDIX A5, Effect of varying activation energy between species on predator extinction temperature, beta= 0.3 ####
+
+ombPCR_LP_def1 <- readMat("Data/omb_var/LP_TempOmb(1).mat")
+ombPCR_LP_def2 <- readMat("Data/omb_var/LP_TempOmb(2).mat")
+ombPCR_LP_def1 <- as.data.frame(t(ombPCR_LP_def1$x[5:6,]))
+ombPCR_LP_def2 <- as.data.frame(t(ombPCR_LP_def2$x[5:6,]))
+ombPCR_LP_def <- rbind(ombPCR_LP_def1,ombPCR_LP_def2)
+ombPCR_LP_def["beta"] <- 0
+
+ombPCR_LP_beta03_1 <- readMat("Data/omb_var/LP_Tempomb_beta03(1).mat")
+ombPCR_LP_beta03_2 <- readMat("Data/omb_var/LP_Tempomb_beta03(2).mat")
+ombPCR_LP_beta03_1 <- as.data.frame(t(ombPCR_LP_beta03_1$x[5:6,]))
+ombPCR_LP_beta03_2 <- as.data.frame(t(ombPCR_LP_beta03_2$x[5:6,]))
+ombPCR_LP_beta03 <- rbind(ombPCR_LP_beta03_1,ombPCR_LP_beta03_2)
+ombPCR_LP_beta03["beta"] <- 0.3
+
+ombPCR_LP <- rbind(ombPCR_LP_def,ombPCR_LP_beta03)
+colnames(ombPCR_LP) <- c("T","Omb","beta")
+
+pdf("MS1_AppendixA5.pdf", width = 5, height = 4)
+ombPCR_LP %>% 
+  filter(T < 305 && T > 274) %>%
+  mutate(T = T-292) %>%
+  ggplot(.,aes(Omb, T, linetype = as.factor(beta))) +
+  geom_line() +
+  scale_linetype_manual(values = c("solid", "dashed"), name = expression(beta)) +
+  ylab(expression(paste("P extinction Temp. (relative to ",italic("T")["0"],")"))) +   
+  xlab("Temp effect on max. intake rate of P") +
+  coord_cartesian(ylim = c(0, 15), xlim = c(-0.10, 0.05)) +
+  theme(panel.background = element_rect(fill = "white", colour = "black"),
+        panel.border = element_rect(fill = "transparent", colour = "black"),
+        legend.key.size = unit(.4, "cm"),
+        legend.text = element_text(size = 8),
+        legend.box.margin = margin(1,1,1,1),
+        legend.key.width = unit(1.5,"line"),
+        legend.key = element_rect(fill = "white", colour = "white"),
+        legend.box.background = element_rect(fill = "transparent", colour = "white"),
+        strip.text.x = element_text(size = 10))
 dev.off()
