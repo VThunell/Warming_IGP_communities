@@ -992,7 +992,7 @@ colnames(Ip_ICs15) <- c("T","Beta")
 
 
 # beta-Temp plot
-pdf("MS1_AppendixA3.pdf", width = 5, height = 4)
+pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
 ICs15x %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
