@@ -10,9 +10,8 @@ library(R.matlab)
 library(tidyverse)
 library(patchwork)
 library(RColorBrewer)
-library(grid)
 
-#### Figure 1 Plot equilibrium biomass over Temp with Min and max of amplitudes for cyclic region ######
+#### Figure 1 Plot equilibrium biomass over Temp with min and max of amplitudes for cyclic region #####
 
 # Import Data for default scenario, Fig. 1 & 2
 EP_T1 <- readMat("Data/default/EP_T_default(1).mat")
@@ -130,7 +129,7 @@ PCRcyclic_long_filt <-
   mutate(Temp = Temp-292)
 
 
-pdf("MS1_Fig1.pdf", width = 8, height = 3.5)
+#pdf("MS1_Fig1.pdf", width = 8, height = 3.5)
 ggplot() +
   geom_line(EP_Tx_long_filt, size=0.7, mapping = aes(T, eq_bmd, color = D, linetype = D)) +
   geom_line(PCRcyclic_long_filt, linetype= "dotted", 
@@ -153,7 +152,7 @@ ggplot() +
         legend.key = element_rect(fill = "white", colour = "white"),
         strip.text.x = element_text(size = 10)
   )
-dev.off()
+#dev.off()
 
 #### Figure 3 Plot equilibrium biomass over T, beta = 0.15  ##########
 
@@ -190,7 +189,7 @@ EP_Tx_b015_long <- gather(EP_Tx_b015, coord, eq_bmd, Pa, Pj, C, R, factor_key=T)
 Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
-pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
+#pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
 EP_Tx_b015_long %>%
   filter(T < 305 & T > 274) %>%
   filter(eq_bmd >= 0 ) %>%
@@ -214,7 +213,7 @@ EP_Tx_b015_long %>%
         #legend.box.background = element_rect(fill = "transparent", colour = "white"),
         strip.text.x = element_text(size = 10)
 )
-dev.off()
+#dev.off()
 
 #### Figure 2 Plot rate in user functions over T, default parameter values excluding cyclic region #######################
 
@@ -392,11 +391,11 @@ empty <- UF_both_long %>%
         axis.ticks = element_blank()
     )
 
-pdf("MS1_Fig2.pdf", width = 8, height = 6)
+#pdf("MS1_Fig2.pdf", width = 8, height = 6)
 (bmp|irp|mrp)/(bmms|irms|empty)
-dev.off()
+#dev.off()
 
-pdf("MS1_legendFig2.pdf", width = 7, height = 6)
+#pdf("MS1_legendFig2.pdf", width = 7, height = 6)
 ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
   geom_path(size=0.7) +
   theme(legend.text = element_text(size = 8),
@@ -408,7 +407,7 @@ ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
   ) +
   scale_linetype_manual(values = c("solid","solid", "solid", "solid", "dashed"), name = "State", labels = c("Adult predator", "Juvenile predator", "Consumer", "Stable PCR", "Unstable PCR")) +
   scale_color_manual(values = c("#000000","#999999","#DADADA","#000000","#000000"), name = "State", labels = c("Adult predator", "Juvenile predator", "Consumer", "Stable PCR", "Unstable PCR")) 
-dev.off()
+#dev.off()
 
 
 ### Figure 4 Plot community composition over T and beta ############
@@ -487,10 +486,11 @@ Ip2 <- readMat("Data/default/BP_BP_TBeta_PreInv(2).mat")
 #PR6_defx <- as.data.frame(t(PR6_def$x[5:6,]))
 Ip <- as.data.frame(rbind(t(Ip1$x[5:6,]),t(Ip2$x[5:6,]))) # the stable and unstable coexistence
 colnames(Ip) <- c("T","Beta")
+Ip["T"] <- Ip["T"]-292
 str(Ip)
 
 # beta-Temp plot
-pdf("MS1_Fig4.pdf", width = 5, height = 4)
+#pdf("MS1_Fig4.pdf", width = 5, height = 4)
 defx %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -510,7 +510,7 @@ defx %>%
         legend.title = element_blank(),
         legend.key.size = unit(.4, "cm"),
         legend.text = element_text(size= 8))
-dev.off()
+#dev.off()
 
 ### APPENDIX A1, Non-dynamic intake rates over Temp #####
 
@@ -563,7 +563,7 @@ str(intake)
 intake_long <- gather(intake, key = "coord", value = "rate",1:3)#, eq_bmd, Pa, Pj, C, R) #long format 
 str(intake_long)
 
-pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
+#pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
 intake_long %>%
   mutate(T = T-292) %>%
   ggplot(., aes(T, rate, colour = coord)) +
@@ -577,7 +577,7 @@ intake_long %>%
         panel.border = element_rect(fill = "transparent", colour = "black"),
         legend.title = element_blank()
         )
-dev.off()
+#dev.off()
 
 
 #### APPENDIX A3 Varying Temp effect processes #####
@@ -665,7 +665,7 @@ A3_df_long$Sce_f = factor(A3_df_long$Sce, levels=c('Null','Delta','DeltaAndK','N
 str(A3_df_long)
 
 
-pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
+#pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
 A3_df_long %>%
   filter(T > 275) %>%
   filter(D != "Cyc") %>%
@@ -689,10 +689,10 @@ A3_df_long %>%
         legend.key = element_rect(fill = "white", colour = "white"),
         legend.box.background = element_rect(fill = "transparent", colour = "white"),
         strip.text.x = element_text(size = 10) )
-dev.off()
+#dev.off()
 
 
-### Rate functions for each temperarture scenario
+### Rate functions for each temperature scenario
 
 # .mat h rows corresponding to user functions (* multiplies with coordinate for rate of coordinate biomass,  rownumber in UF_T, see next # create..)
 #3.	 mat – mr     (*Pj, 1)
@@ -856,9 +856,9 @@ mrr_UF <-  A3_UF_both_long %>%
         legend.key = element_rect(fill = "transparent")
 )
 
-pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
+#pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
 bmp_UF|irp_UF|mrr_UF
-dev.off()
+#dev.off()
 
 # Mass specific rate plots for each scenario
 
@@ -934,9 +934,9 @@ mrrx_UF <- A3_UF_both_long %>%
         axis.title.y = element_blank()
 )
 
-pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
+#pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
 bmms_UF|irms_UF
-dev.off()
+#dev.off()
 
 
 ### APPENDIX A4, Plot community composition over T and beta, I_Cs = 15 ####
@@ -983,16 +983,15 @@ colnames(PCRPR_ICs15x) <- c("T","Beta","Bf")
 ICs15x <- rbind(ICs15x,CR1_ICs15x,PCRPR_ICs15x)
 ICs15x$Bf <- factor(ICs15x$Bf, levels = c("CR", "PR", "PCR","PCRPR"))
 
-# fix the Ip line 
+# Fix the Ip line 
 Ip1_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(1).mat")
 Ip2_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(2).mat")
 Ip_ICs15 <- as.data.frame(rbind(t(Ip1_ICs15$x[5:6,]),t(Ip2_ICs15$x[5:6,]))) # the stable and unstable coexistence
 Ip_ICs15$T <- Ip_ICs15$T-292
 colnames(Ip_ICs15) <- c("T","Beta")
 
-
 # beta-Temp plot
-pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
+#pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
 ICs15x %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -1012,9 +1011,9 @@ ICs15x %>%
         legend.title = element_blank(),
         legend.key.size = unit(.4, "cm"),
         legend.text = element_text(size= 8))
-dev.off()
+#dev.off()
 
-### APPENDIX A5, Effect of varying activation energy between species on predator extinction temperature, beta= 0.3 ####
+### APPENDIX A5, Predator extinction temperature( beta=0,0.3) with a warm adapted predator ####
 
 ombPCR_LP_def1 <- readMat("Data/omb_var/LP_TempOmb(1).mat")
 ombPCR_LP_def2 <- readMat("Data/omb_var/LP_TempOmb(2).mat")
@@ -1033,7 +1032,7 @@ ombPCR_LP_beta03["beta"] <- 0.3
 ombPCR_LP <- rbind(ombPCR_LP_def,ombPCR_LP_beta03)
 colnames(ombPCR_LP) <- c("T","Omb","beta")
 
-pdf("MS1_AppendixA5.pdf", width = 5, height = 4)
+#pdf("MS1_AppendixA5.pdf", width = 5, height = 4)
 ombPCR_LP %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -1052,4 +1051,4 @@ ombPCR_LP %>%
         legend.key = element_rect(fill = "white", colour = "white"),
         legend.box.background = element_rect(fill = "transparent", colour = "white"),
         strip.text.x = element_text(size = 10))
-dev.off()
+#dev.off()
