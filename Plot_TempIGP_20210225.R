@@ -139,9 +139,11 @@ ggplot() +
                         name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
   scale_color_manual(values = c("#000000", "#999999", "#000000", "#000000"),
                      name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),  
+  # scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),  
+  #                    limits= c(-10,10), breaks = scales::pretty_breaks(n = 6)) +
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,10), breaks = scales::pretty_breaks(n = 6)) +
-  ylab(expression(paste("Equilibrium biomass density "))) + #, "[", g ~V^{-1}, "]"))) +   
+  ylab(expression(paste("Equilibrium biomass density "))) + #, "[", g ~V^{-1}, "]"))) +
   coord_cartesian(ylim=c(0, 2.5)) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
         strip.background = element_rect(fill = "transparent"),
@@ -201,7 +203,7 @@ EP_Tx_b015_long %>%
     coord_cartesian(ylim=c(0, 2.5)) +
     scale_linetype_manual(values = c("solid","solid", "solid", "dashed", "dashed"), name = "State", labels = c("PCR", "PR", "CR", "Unst. PCR", "Unst. PR")) +
     scale_color_manual(values = c("#000000","#DADADA","#999999","#000000","#DADADA"), name = "State", labels = c("PCR", "PR",  "CR", "Unst. PCR", "Unst. PR")) +
-    scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),  
+    scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                        limits= c(-10,10), breaks = scales::pretty_breaks(n = 6))  +
     theme(panel.background = element_rect(fill = "white", colour = "black"),
         strip.background = element_rect(fill = "transparent"),
@@ -277,7 +279,7 @@ bmp <- UF_both_long %>%
    ggplot(., aes(T, bm_day, color=UF)) +
     geom_line(size=0.7, show.legend = FALSE) +
     scale_colour_manual(values = c("#000000","#DADADA","#999999"), name = "Biomass production", labels = c("Adult predator", "Consumer", "Juvenile predator"))+
-    scale_x_continuous("Temperature [K]", limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
+    scale_x_continuous("T[K]", limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
     scale_linetype_manual(values = c("dotted", "solid"), name = "Type", labels = c("Per unit biomass", "Population")) +
     ggtitle("Biomass production") +
     annotate(geom="text", -Inf, Inf, label="A", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
@@ -300,7 +302,8 @@ bmms <- UF_both_long %>%
    ggplot(., aes(T, bm_day, color=UF)) +
     geom_line(size=0.7, show.legend = FALSE) +
     scale_colour_manual(values = c("#000000","#DADADA","#999999"), name = "Biomass production", labels = c("Adult predator", "Consumer", "Juvenile predator"))+
-    scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
+    scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
+                       limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
     scale_linetype_manual(values = c("dotted", "solid"), name = "Type", labels = c("Per unit biomass", "Population")) +
     annotate(geom="text", -Inf, Inf, label="D", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
     ylab(expression(paste("Mass-specific rate "))) +#, "[", m~m^{-1}, time^{-1}, "]"))) +
@@ -321,7 +324,7 @@ irp <- UF_both_long %>%
   ggplot(., aes(T, bm_day, color=UF)) +
    geom_line(size=0.7, show.legend = FALSE) +
    scale_colour_manual(values = c("#000000", "#DADADA", "#999999"), name = "Rate", labels = c("Predation", "Consump. C", "Consump. Pj"))+
-   scale_x_continuous("Temperature [K]", limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
+   scale_x_continuous("T[K]", limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
    scale_linetype_manual(values = c("dotted", "solid"), name = "Type", labels = c("Per unit biomass", "Population")) +
    ggtitle("Consumption / Predation") +
    annotate(geom="text", -Inf, Inf, label="B", hjust = -17, vjust = 3, size= 4, fontface = "bold") +
@@ -343,7 +346,8 @@ irms <- UF_both_long %>%
   ggplot(., aes(T, bm_day, color=UF)) +
    geom_line(size=0.7, show.legend = FALSE) +
    scale_colour_manual(values = c("#000000", "#DADADA", "#999999"), name = "Rate", labels = c("Predation", "Consump. C", "Consump. Pj"))+
-   scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) + # scales::pretty_breaks(n = 5)) +
+   scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")), 
+                      limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) + # scales::pretty_breaks(n = 5)) +
    scale_linetype_manual(values = c("dotted", "solid"), name = "Type", labels = c("Per unit biomass", "Population")) +
    annotate(geom="text", -Inf, Inf, label="E", hjust = -18.5, vjust = 2, size= 4, fontface = "bold") +
    scale_y_continuous(labels=c("0" = "0.0", "1" = "1.0", "2" = "2.0", "3" = "3.0",  "4" = "4.0", "5"="5.0")) +
@@ -362,7 +366,8 @@ mrp <- UF_both_long %>%
    geom_line(size=0.7,show.legend = FALSE) +
    scale_colour_manual(values = c("#999999","#000000"), name = "Biomass production", labels = c( "Maturation rate", "Reproduction rate"))+
    scale_linetype_manual(values = c("solid", "dashed"), name = "D", labels = c("stable", "unstable")) +
-   scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
+   scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
+                      limits= c(-0.5,4.5), breaks = c(0,1,2,3,4)) +
    annotate(geom="text", -Inf, Inf, label="C", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
    ggtitle("Maturation / Reproduction") + 
    theme(panel.background = element_rect(fill = "white", colour = "black"),
@@ -503,7 +508,7 @@ defx %>%
    scale_y_continuous(expand = c(0, 0), breaks=c(0.1,0.3,0.5,0.7,0.9)) +
    scale_x_continuous(expand = c(0, 0), breaks=c(-8,-4,0,4,8))+
    ylab(expression(paste("Predator resource preference (", beta, ")"))) +   
-   xlab(expression(paste("Temperature relative to ",italic("T")["0"]))) +
+   xlab(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +
    coord_cartesian(xlim = c(-8.5, 8.5), ylim = c(0, 1))+
    theme(panel.background = element_rect(fill = "white", colour = "black"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
@@ -570,7 +575,8 @@ intake_long %>%
   geom_line(size=0.8) +
   ylab(expression(paste("ln(Intake rate) "))) +#, "[", m ~m^{-1}~time^{-1}, "]"))) +
   scale_colour_manual(values = c("#DADADA","#000000","#999999"), name = "Species/Stage", labels = c("Consumer", "Adult predator", "Juvenile predator"))+
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), limits= c(-8,8), breaks = scales::pretty_breaks(n = 5)) +
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
+                     limits= c(-8,8), breaks = scales::pretty_breaks(n = 5)) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
         strip.background = element_rect(fill = "transparent"),
         legend.key = element_rect(fill = "white", colour = "white"),
@@ -677,7 +683,8 @@ A3_df_long %>%
   scale_linetype_manual(values = c("solid", "dashed"), name = "State", labels = c("Stable PCR", "Unst. PCR")) +
   scale_colour_brewer(palette="Set1", name = NULL, 
                       labels = c("Null", "Resource turnover", "Resource turnover & Rmax", "Mortality temp. independent", "Default")) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), limits= c(-12,33), breaks = scales::pretty_breaks(n = 6)) +
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
+                     breaks = scales::pretty_breaks(n = 6)) +
   scale_alpha_manual(values = c(1,0.5), name = "State", labels = c("Stable PCR", "Unst. PCR")) +
   coord_cartesian(ylim = c(0, 2))+
   theme(panel.background = element_rect(fill = "white", colour = "black"),
@@ -794,7 +801,7 @@ bmp_UF <- A3_UF_both_long %>%
   geom_line(size=0.7, show.legend = FALSE ) +  
   facet_grid(UF_f~., scales="free_y") + #, labeller = labeller(coord_f = Fig1bmd_labs) )+ 
   scale_colour_brewer(palette="Set1", name = NULL) +#, labels = c("Null (No temp. effect)", "Resource turnover", "Resource turnover & Rmax", "No temp. mortality", "Default")) +  
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   ggtitle("Biomass production") +
   ylab(expression(paste("Population level rate "))) +#, "[", m ~time^{-1}, "]"))) +
@@ -819,7 +826,7 @@ irp_UF <- A3_UF_both_long %>%
   geom_line(size=0.7, show.legend = FALSE) +  
   facet_grid(UF_f~., scales="free_y", labeller = labeller(UF_f = supp.labsA3_UF) )+ 
   scale_colour_brewer(palette="Set1", name = NULL) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), 
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   ggtitle("Consumption / Predation") +
   ylab(expression(paste("Population level rate ", "[", m ~time^{-1}, "]"))) +
@@ -842,7 +849,7 @@ mrr_UF <-  A3_UF_both_long %>%
   scale_alpha_manual(values = c(1, 0.5), name = "State") +
   guides(alpha=FALSE, color = guide_legend(order = 1), linetype = guide_legend(order = 2))  +
   scale_colour_brewer(palette="Set1", name = NULL, labels = c("Null", "Resource turnover", "Resource turnover & Rmax", "Mortality temp. independent", "Default")) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])), 
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   scale_linetype_manual(values = c("solid", "dashed"), name = NULL, labels = c("Stable PCR", "Unstable PCR")) +
   ggtitle("Maturation / Reproduction") +
@@ -872,7 +879,7 @@ bmms_UF <- A3_UF_both_long %>%
   geom_line(size=0.7, show.legend = FALSE ) +  
   facet_grid(UF_f~., scales="free_y") + #, labeller = labeller(coord_f = Fig1bmd_labs) )+ 
   scale_colour_brewer(palette="Set1", name = NULL) +#, labels = c("Null (No temp. effect)", "Resource turnover", "Resource turnover & Rmax", "No temp. mortality", "Default")) +  
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   ggtitle("Biomass production") +
   ylab(expression(paste("Mass-specific rate "))) +#, "[", m~m^{-1}, time^{-1}, "]"))) +
@@ -898,7 +905,7 @@ irms_UF <- A3_UF_both_long %>%
   facet_grid(UF_f~., scales="free_y", labeller = labeller(UF_f = supp.labsA3_UF) )+ 
   guides(alpha=FALSE, color = guide_legend(order = 1), linetype = guide_legend(order = 2))  +
   scale_colour_brewer(palette="Set1", name = NULL, labels = c("Null", "Resource turnover", "Resource turnover & Rmax", "Mortality temp. independent", "Default")) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   ggtitle("Consumption / Predation") +
   ylab(expression(paste("Mass-specific rate ", "[", m~m^{-1}, time^{-1}, "]"))) +
@@ -922,7 +929,7 @@ mrrx_UF <- A3_UF_both_long %>%
   scale_alpha_manual(values = c("1", "0.5"), name = "State") +
   guides(alpha=FALSE, color = guide_legend(order = 1), linetype = guide_legend(order = 2))  +
   scale_colour_brewer(palette="Set1", name = NULL, labels = c("Null", "Resource turnover", "Resource turnover & Rmax", "Mortality temp. independent", "Default")) +
-  scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),
+  scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,30), breaks = scales::pretty_breaks(n = 5)) +
   scale_linetype_manual(values = c("solid", "dashed"), name = NULL, labels = c("Stable PCR", "Unstable PCR")) +
   ggtitle("Maturation / Reproduction") +
@@ -1004,7 +1011,7 @@ ICs15x %>%
   scale_y_continuous(expand = c(0, 0), breaks=c(0.1,0.3,0.5,0.7,0.9)) +
   scale_x_continuous(expand = c(0, 0), breaks=c(-8,-4,0,4,8)) +
   ylab(expression(paste("Predator resource preference (", beta, ")"))) +   
-  xlab(expression(paste("Temperature relative to ",italic("T")["0"]))) +
+  xlab(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +
   coord_cartesian(xlim = c(-8.5, 8.5), ylim = c(0, 1))+
   theme(panel.background = element_rect(fill = "white", colour = "black"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
@@ -1039,7 +1046,7 @@ ombPCR_LP %>%
   ggplot(.,aes(Omb, T, linetype = as.factor(beta))) +
   geom_line() +
   scale_linetype_manual(values = c("solid", "dashed"), name = expression(beta)) +
-  ylab(expression(paste("P extinction Temp. (relative to ",italic("T")["0"],")"))) +   
+  ylab(expression(paste("P extinction temp, ",italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +   
   xlab("Temp effect on max. intake rate of P") +
   coord_cartesian(ylim = c(0, 15), xlim = c(-0.10, 0.05)) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
