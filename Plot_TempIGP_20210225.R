@@ -128,8 +128,7 @@ PCRcyclic_long_filt <-
   filter(Temp < 305 & Temp > 280) %>%
   mutate(Temp = Temp-292)
 
-
-#pdf("MS1_Fig1.pdf", width = 8, height = 3.5)
+pdf("MS1_Fig1.pdf", width = 8, height = 3.5, useDingbats=FALSE)
 ggplot() +
   geom_line(EP_Tx_long_filt, size=0.7, mapping = aes(T, eq_bmd, color = D, linetype = D)) +
   geom_line(PCRcyclic_long_filt, linetype= "dotted", 
@@ -139,22 +138,21 @@ ggplot() +
                         name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
   scale_color_manual(values = c("#000000", "#999999", "#000000", "#000000"),
                      name = "State", labels = c("PCR", "CR", "Unst. PCR", "Limit cycles"), drop = FALSE) +
-  # scale_x_continuous(expression(paste("Temperature relative to ",italic("T")["0"])),  
-  #                    limits= c(-10,10), breaks = scales::pretty_breaks(n = 6)) +
   scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-10,10), breaks = scales::pretty_breaks(n = 6)) +
   ylab(expression(paste("Equilibrium biomass density "))) + #, "[", g ~V^{-1}, "]"))) +
   coord_cartesian(ylim=c(0, 2.5)) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 13),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
-        legend.text = element_text(size = 8),
         legend.title = element_blank(),
+        legend.text = element_text(size = 12),
         legend.key.width = unit(1.5,"line"),
         legend.key = element_rect(fill = "white", colour = "white"),
-        strip.text.x = element_text(size = 10)
+        strip.text.x = element_text(size = 12)
   )
-#dev.off()
+dev.off()
 
 #### Figure 3 Plot equilibrium biomass over T, beta = 0.15  ##########
 
@@ -191,7 +189,7 @@ EP_Tx_b015_long <- gather(EP_Tx_b015, coord, eq_bmd, Pa, Pj, C, R, factor_key=T)
 Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
-#pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
+pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
 EP_Tx_b015_long %>%
   filter(T < 305 & T > 274) %>%
   filter(eq_bmd >= 0 ) %>%
@@ -206,16 +204,16 @@ EP_Tx_b015_long %>%
     scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                        limits= c(-10,10), breaks = scales::pretty_breaks(n = 6))  +
     theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        legend.text = element_text(size = 8),
-        legend.title = element_blank(),
-        legend.key.width = unit(1.5,"line"),
-        legend.key = element_rect(fill = "white", colour = "white"),
-        #legend.box.background = element_rect(fill = "transparent", colour = "white"),
-        strip.text.x = element_text(size = 10)
+          text = element_text(family = "sans", size = 13),
+          strip.background = element_rect(fill = "transparent"),
+          panel.border = element_rect(fill = "transparent", colour = "black"),
+          legend.text = element_text(size = 12),
+          legend.title = element_blank(),
+          legend.key.width = unit(1.5,"line"),
+          legend.key = element_rect(fill = "white", colour = "white"),
+          strip.text.x = element_text(size = 12)
 )
-#dev.off()
+dev.off()
 
 #### Figure 2 Plot rate in user functions over T, default parameter values excluding cyclic region #######################
 
@@ -285,13 +283,14 @@ bmp <- UF_both_long %>%
     annotate(geom="text", -Inf, Inf, label="A", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
     ylab(expression(paste("Population level rate "))) +#, "[", m ~time^{-1}, "]"))) +
     theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        plot.title = element_text(hjust = 0.5, size=10),
-        axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_text(size=10)
-        )
+          text = element_text(family = "sans", size = 11),
+          strip.background = element_rect(fill = "transparent"),
+          panel.border = element_rect(fill = "transparent", colour = "black"),
+          plot.title = element_text(hjust = 0.5),
+          axis.text.x = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_text(size=14)
+)
 
 bmms <- UF_both_long %>%
   filter(UF %in% c("BC","BJ","BA"))  %>%
@@ -307,12 +306,12 @@ bmms <- UF_both_long %>%
     scale_linetype_manual(values = c("dotted", "solid"), name = "Type", labels = c("Per unit biomass", "Population")) +
     annotate(geom="text", -Inf, Inf, label="D", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
     ylab(expression(paste("Mass-specific rate "))) +#, "[", m~m^{-1}, time^{-1}, "]"))) +
-  #scale_y_continuous(labels=c("0.0" = "0.00", "0.5" = "0.50", "1.0" = "1.00", "1.5" = "1.50"))+
-   theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        axis.title.x = element_text(size=10),
-        axis.title.y = element_text(size=10)
+    theme(panel.background = element_rect(fill = "white", colour = "black"),
+         text = element_text(family = "sans", size = 12),
+         strip.background = element_rect(fill = "transparent"),
+         panel.border = element_rect(fill = "transparent", colour = "black"),
+         axis.title.x = element_text(size=12),
+         axis.title.y = element_text(size=14)
 )
 
 irp <- UF_both_long %>%
@@ -330,12 +329,13 @@ irp <- UF_both_long %>%
    annotate(geom="text", -Inf, Inf, label="B", hjust = -17, vjust = 3, size= 4, fontface = "bold") +
    scale_y_continuous(labels=c("0" = "0.0", "1" = "1.0", "2" = "2.0", "3" = "3.0",  "4" = "4.0")) +
    theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        plot.title = element_text(hjust = 0.5, size=10),
-        axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.title.y = element_blank())
+         text = element_text(family = "sans", size = 11),
+         strip.background = element_rect(fill = "transparent"),
+         panel.border = element_rect(fill = "transparent", colour = "black"),
+         plot.title = element_text(hjust = 0.5),
+         axis.text.x = element_blank(),
+         axis.title.x = element_blank(),
+         axis.title.y = element_blank())
 
 irms <- UF_both_long %>%
   filter(UF %in% c("AC","PR","CR"))  %>% 
@@ -352,10 +352,11 @@ irms <- UF_both_long %>%
    annotate(geom="text", -Inf, Inf, label="E", hjust = -18.5, vjust = 2, size= 4, fontface = "bold") +
    scale_y_continuous(labels=c("0" = "0.0", "1" = "1.0", "2" = "2.0", "3" = "3.0",  "4" = "4.0", "5"="5.0")) +
    theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        axis.title.y = element_blank(),
-        axis.title.x = element_text(size=10) )
+         text = element_text(family = "sans", size = 12),
+         strip.background = element_rect(fill = "transparent"),
+         panel.border = element_rect(fill = "transparent", colour = "black"),
+         axis.title.y = element_blank(),
+         axis.title.x = element_text(size=12) )
 
 mrp <- UF_both_long %>%
   filter(UF %in% c("mr","rr"))  %>%
@@ -371,18 +372,13 @@ mrp <- UF_both_long %>%
    annotate(geom="text", -Inf, Inf, label="C", hjust = -17, vjust = 2, size= 4, fontface = "bold") +
    ggtitle("Maturation / Reproduction") + 
    theme(panel.background = element_rect(fill = "white", colour = "black"),
-        strip.background = element_rect(fill = "transparent"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, size=10),
-        axis.title.x = element_text(size=10),
-        legend.key = element_rect(fill = "transparent"),
-        legend.title = element_blank(),
-        legend.background = element_rect(fill = "white", colour = "black") ,
-        legend.position = c(.1, .2),
-        legend.key.size = unit(.5, "cm"),
-        legend.text = element_text(size= 8)
-  )
+         text = element_text(family = "sans", size = 11),
+         strip.background = element_rect(fill = "transparent"),
+         panel.border = element_rect(fill = "transparent", colour = "black"),
+         axis.title.y = element_blank(),
+         plot.title = element_text(hjust = 0.5),
+         axis.title.x = element_text(size=12),
+         )
 
 empty <- UF_both_long %>%
   ggplot(., aes(T, bm_day, linetype = D, color=UF)) +
@@ -396,15 +392,17 @@ empty <- UF_both_long %>%
         axis.ticks = element_blank()
     )
 
-#pdf("MS1_Fig2.pdf", width = 8, height = 6)
+pdf("MS1_Fig2.pdf", width = 8, height = 6)
 (bmp|irp|mrp)/(bmms|irms|empty)
-#dev.off()
+dev.off()
 
-#pdf("MS1_legendFig2.pdf", width = 7, height = 6)
+# Manual legend that I pasted into Fig2 in AdobeReader
+pdf("MS1_legendFig2.pdf", width = 7, height = 6)
 ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
-  geom_path(size=0.7) +
-  theme(legend.text = element_text(size = 8),
+  geom_line() +
+  theme(text = element_text(family = "sans"),
         legend.title = element_blank(),
+        legend.text = element_text(size = 14),
         legend.box.margin = margin(1,1,1,1),
         legend.key.width = unit(1.5,"line"),
         legend.key = element_rect(fill = "white", colour = "white"),
@@ -412,7 +410,7 @@ ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
   ) +
   scale_linetype_manual(values = c("solid","solid", "solid", "solid", "dashed"), name = "State", labels = c("Adult predator", "Juvenile predator", "Consumer", "Stable PCR", "Unstable PCR")) +
   scale_color_manual(values = c("#000000","#999999","#DADADA","#000000","#000000"), name = "State", labels = c("Adult predator", "Juvenile predator", "Consumer", "Stable PCR", "Unstable PCR")) 
-#dev.off()
+dev.off()
 
 
 ### Figure 4 Plot community composition over T and beta ############
@@ -495,7 +493,7 @@ Ip["T"] <- Ip["T"]-292
 str(Ip)
 
 # beta-Temp plot
-#pdf("MS1_Fig4.pdf", width = 5, height = 4)
+pdf("MS1_Fig4.pdf", width = 5, height = 4)
 defx %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -511,11 +509,12 @@ defx %>%
    xlab(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +
    coord_cartesian(xlim = c(-8.5, 8.5), ylim = c(0, 1))+
    theme(panel.background = element_rect(fill = "white", colour = "black"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        legend.title = element_blank(),
-        legend.key.size = unit(.4, "cm"),
-        legend.text = element_text(size= 8))
-#dev.off()
+         text = element_text(family = "sans", size = 13),
+         panel.border = element_rect(fill = "transparent", colour = "black"),
+         legend.title = element_blank(),
+         legend.text = element_text(size = 10),
+         legend.key.size = unit(.4, "cm"))
+dev.off()
 
 ### APPENDIX A1, Non-dynamic intake rates over Temp #####
 
@@ -568,7 +567,7 @@ str(intake)
 intake_long <- gather(intake, key = "coord", value = "rate",1:3)#, eq_bmd, Pa, Pj, C, R) #long format 
 str(intake_long)
 
-#pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
+pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
 intake_long %>%
   mutate(T = T-292) %>%
   ggplot(., aes(T, rate, colour = coord)) +
@@ -578,12 +577,14 @@ intake_long %>%
   scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
                      limits= c(-8,8), breaks = scales::pretty_breaks(n = 5)) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 12),
         strip.background = element_rect(fill = "transparent"),
         legend.key = element_rect(fill = "white", colour = "white"),
+        legend.text = element_text(size = 10),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         legend.title = element_blank()
         )
-#dev.off()
+dev.off()
 
 
 #### APPENDIX A3 Varying Temp effect processes #####
@@ -671,7 +672,7 @@ A3_df_long$Sce_f = factor(A3_df_long$Sce, levels=c('Null','Delta','DeltaAndK','N
 str(A3_df_long)
 
 
-#pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
+pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
 A3_df_long %>%
   filter(T > 275) %>%
   filter(D != "Cyc") %>%
@@ -684,19 +685,23 @@ A3_df_long %>%
   scale_colour_brewer(palette="Set1", name = NULL, 
                       labels = c("Null", "Resource turnover", "Resource turnover & Rmax", "Mortality temp. independent", "Default")) +
   scale_x_continuous(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]")),
-                     breaks = scales::pretty_breaks(n = 6)) +
+                     limits= c(-15,45), breaks = scales::pretty_breaks(n = 6)) +
   scale_alpha_manual(values = c(1,0.5), name = "State", labels = c("Stable PCR", "Unst. PCR")) +
   coord_cartesian(ylim = c(0, 2))+
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 10),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
-        legend.text = element_text(size = 8),
         legend.title = element_blank(),
         legend.key.width = unit(1.5,"line"),
+        legend.text = element_text(size = 10),
         legend.key = element_rect(fill = "white", colour = "white"),
         legend.box.background = element_rect(fill = "transparent", colour = "white"),
-        strip.text.x = element_text(size = 10) )
-#dev.off()
+        strip.text.x = element_text(size = 11),
+        axis.text = element_text(size = 9),
+        axis.title.y = element_text(size = 12))
+
+dev.off()
 
 
 ### Rate functions for each temperature scenario
@@ -806,6 +811,7 @@ bmp_UF <- A3_UF_both_long %>%
   ggtitle("Biomass production") +
   ylab(expression(paste("Population level rate "))) +#, "[", m ~time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 13),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
@@ -831,6 +837,7 @@ irp_UF <- A3_UF_both_long %>%
   ggtitle("Consumption / Predation") +
   ylab(expression(paste("Population level rate ", "[", m ~time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 13),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
@@ -855,6 +862,7 @@ mrr_UF <-  A3_UF_both_long %>%
   ggtitle("Maturation / Reproduction") +
   ylab(expression(paste("Population level rate ", "[", m ~time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 13),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
@@ -863,9 +871,9 @@ mrr_UF <-  A3_UF_both_long %>%
         legend.key = element_rect(fill = "transparent")
 )
 
-#pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
+pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
 bmp_UF|irp_UF|mrr_UF
-#dev.off()
+dev.off()
 
 # Mass specific rate plots for each scenario
 
@@ -884,6 +892,7 @@ bmms_UF <- A3_UF_both_long %>%
   ggtitle("Biomass production") +
   ylab(expression(paste("Mass-specific rate "))) +#, "[", m~m^{-1}, time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 12),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
@@ -910,12 +919,13 @@ irms_UF <- A3_UF_both_long %>%
   ggtitle("Consumption / Predation") +
   ylab(expression(paste("Mass-specific rate ", "[", m~m^{-1}, time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 12),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
         axis.title.y = element_blank(),
-        legend.key = element_rect(fill = "transparent")
-  )
+        legend.key = element_rect(fill = "transparent"),
+        )
 
 mrrx_UF <- A3_UF_both_long %>%
   filter(UF_f %in% c("mr","rr")) %>%
@@ -935,15 +945,16 @@ mrrx_UF <- A3_UF_both_long %>%
   ggtitle("Maturation / Reproduction") +
   ylab(expression(paste("Mass-specific rate ", "[", m~m^{-1}, time^{-1}, "]"))) +
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 12),
         strip.background = element_rect(fill = "transparent"),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         plot.title = element_text(hjust = 0.5, size=10),
         axis.title.y = element_blank()
 )
 
-#pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
+pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
 bmms_UF|irms_UF
-#dev.off()
+dev.off()
 
 
 ### APPENDIX A4, Plot community composition over T and beta, I_Cs = 15 ####
@@ -998,7 +1009,7 @@ Ip_ICs15$T <- Ip_ICs15$T-292
 colnames(Ip_ICs15) <- c("T","Beta")
 
 # beta-Temp plot
-#pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
+pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
 ICs15x %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -1014,48 +1025,10 @@ ICs15x %>%
   xlab(expression(paste(italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +
   coord_cartesian(xlim = c(-8.5, 8.5), ylim = c(0, 1))+
   theme(panel.background = element_rect(fill = "white", colour = "black"),
+        text = element_text(family = "sans", size = 13),
         panel.border = element_rect(fill = "transparent", colour = "black"),
         legend.title = element_blank(),
-        legend.key.size = unit(.4, "cm"),
-        legend.text = element_text(size= 8))
-#dev.off()
+        legend.text = element_text(size = 10),
+        legend.key.size = unit(.4, "cm"))
+dev.off()
 
-### APPENDIX A5, Predator extinction temperature( beta=0,0.3) with a warm adapted predator ####
-
-ombPCR_LP_def1 <- readMat("Data/omb_var/LP_TempOmb(1).mat")
-ombPCR_LP_def2 <- readMat("Data/omb_var/LP_TempOmb(2).mat")
-ombPCR_LP_def1 <- as.data.frame(t(ombPCR_LP_def1$x[5:6,]))
-ombPCR_LP_def2 <- as.data.frame(t(ombPCR_LP_def2$x[5:6,]))
-ombPCR_LP_def <- rbind(ombPCR_LP_def1,ombPCR_LP_def2)
-ombPCR_LP_def["beta"] <- 0
-
-ombPCR_LP_beta03_1 <- readMat("Data/omb_var/LP_Tempomb_beta03(1).mat")
-ombPCR_LP_beta03_2 <- readMat("Data/omb_var/LP_Tempomb_beta03(2).mat")
-ombPCR_LP_beta03_1 <- as.data.frame(t(ombPCR_LP_beta03_1$x[5:6,]))
-ombPCR_LP_beta03_2 <- as.data.frame(t(ombPCR_LP_beta03_2$x[5:6,]))
-ombPCR_LP_beta03 <- rbind(ombPCR_LP_beta03_1,ombPCR_LP_beta03_2)
-ombPCR_LP_beta03["beta"] <- 0.3
-
-ombPCR_LP <- rbind(ombPCR_LP_def,ombPCR_LP_beta03)
-colnames(ombPCR_LP) <- c("T","Omb","beta")
-
-#pdf("MS1_AppendixA5.pdf", width = 5, height = 4)
-ombPCR_LP %>% 
-  filter(T < 305 && T > 274) %>%
-  mutate(T = T-292) %>%
-  ggplot(.,aes(Omb, T, linetype = as.factor(beta))) +
-  geom_line() +
-  scale_linetype_manual(values = c("solid", "dashed"), name = expression(beta)) +
-  ylab(expression(paste("P extinction temp, ",italic(Delta),italic("T "),"(relative to ",italic("T")["0"],")"," [K]"))) +   
-  xlab("Temp effect on max. intake rate of P") +
-  coord_cartesian(ylim = c(0, 15), xlim = c(-0.10, 0.05)) +
-  theme(panel.background = element_rect(fill = "white", colour = "black"),
-        panel.border = element_rect(fill = "transparent", colour = "black"),
-        legend.key.size = unit(.4, "cm"),
-        legend.text = element_text(size = 8),
-        legend.box.margin = margin(1,1,1,1),
-        legend.key.width = unit(1.5,"line"),
-        legend.key = element_rect(fill = "white", colour = "white"),
-        legend.box.background = element_rect(fill = "transparent", colour = "white"),
-        strip.text.x = element_text(size = 10))
-#dev.off()
