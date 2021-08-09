@@ -189,7 +189,7 @@ EP_Tx_b015_long <- gather(EP_Tx_b015, coord, eq_bmd, Pa, Pj, C, R, factor_key=T)
 Fig1bmd_labs <- c("Adult predator", "Juvenile predator", "Consumer", "Resource")
 names(Fig1bmd_labs) <- c("Pa", "Pj", "C", "R")
 
-pdf("MS1_Fig3.pdf", width = 8, height = 3.5)
+pdf("MS1_Fig3.pdf", width = 8, height = 3.5, useDingbats=FALSE)
 EP_Tx_b015_long %>%
   filter(T < 305 & T > 274) %>%
   filter(eq_bmd >= 0 ) %>%
@@ -392,12 +392,12 @@ empty <- UF_both_long %>%
         axis.ticks = element_blank()
     )
 
-pdf("MS1_Fig2.pdf", width = 8, height = 6)
+pdf("MS1_Fig2.pdf", width = 8, height = 6, useDingbats=FALSE)
 (bmp|irp|mrp)/(bmms|irms|empty)
 dev.off()
 
 # Manual legend that I pasted into Fig2 in AdobeReader
-pdf("MS1_legendFig2.pdf", width = 7, height = 6)
+pdf("MS1_legendFig2.pdf", width = 7, height = 6, useDingbats=FALSE)
 ggplot(EP_Tx_b015_long, aes(T,eq_bmd, color = D, linetype = D)) +
   geom_line() +
   theme(text = element_text(family = "sans"),
@@ -492,7 +492,7 @@ Ip["T"] <- Ip["T"]-292
 str(Ip)
 
 # beta-Temp plot
-pdf("MS1_Fig4.pdf", width = 5, height = 4)
+pdf("MS1_Fig4.pdf", width = 5, height = 4, useDingbats=FALSE)
 defx %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%
@@ -515,7 +515,7 @@ defx %>%
          legend.key.size = unit(.4, "cm"))
 dev.off()
 
-### APPENDIX A1, Non-dynamic intake rates over Temp #####
+### Supplement S1, Non-dynamic intake rates over Temp #####
 
 #IGP_Mod8Temp
 
@@ -566,7 +566,7 @@ str(intake)
 intake_long <- gather(intake, key = "coord", value = "rate",1:3)#, eq_bmd, Pa, Pj, C, R) #long format 
 str(intake_long)
 
-pdf("MS1_AppendixA1.pdf", width = 5, height = 3)
+pdf("MS1_SupplementS1.pdf", width = 5, height = 3, useDingbats=FALSE)
 intake_long %>%
   mutate(T = T-292) %>%
   ggplot(., aes(T, rate, colour = coord)) +
@@ -586,7 +586,7 @@ intake_long %>%
 dev.off()
 
 
-#### APPENDIX A3 Varying Temp effect processes #####
+#### Supplement S3 Varying Temp effect processes #####
 # Null: no tempeffect (EAr=0.6). EP_T_rEA_0.6_notempeffect(2) EP_T_rEA_0.6_notempeffect(1)
 # Delta: only delta temp effect (EAr=0.4). EP_T_rEA_0.4_deltaonly(2) EP_T_rEA_0.4_deltaonly(1)
 # DeltaAndK: reosurces as default (EAr=0.4, EAK=-0.4).  EP_T_rEA_04_KEA_-04_muEA_06(2), EP_T_rEA_04_KEA_-04_muEA_06(1)
@@ -671,7 +671,7 @@ A3_df_long$Sce_f = factor(A3_df_long$Sce, levels=c('Null','Delta','DeltaAndK','N
 str(A3_df_long)
 
 
-pdf("MS1_AppendixA3_1.pdf", width = 8, height = 3.5)
+pdf("MS1_SupplementS3_1.pdf", width = 8, height = 3.5, useDingbats=FALSE)
 A3_df_long %>%
   filter(T > 275) %>%
   filter(D != "Cyc") %>%
@@ -870,7 +870,7 @@ mrr_UF <-  A3_UF_both_long %>%
         legend.key = element_rect(fill = "transparent")
 )
 
-pdf("MS1_AppendixA3_2.pdf", width = 8, height = 6)
+pdf("MS1_SupplementS3_2.pdf", width = 8, height = 6, useDingbats=FALSE)
 bmp_UF|irp_UF|mrr_UF
 dev.off()
 
@@ -951,12 +951,12 @@ mrrx_UF <- A3_UF_both_long %>%
         axis.title.y = element_blank()
 )
 
-pdf("MS1_AppendixA3_3.pdf", width = 8, height = 6)
+pdf("MS1_SupplementS3_3.pdf", width = 8, height = 6, useDingbats=FALSE)
 bmms_UF|irms_UF
 dev.off()
 
 
-### APPENDIX A4, Plot community composition over T and beta, I_Cs = 15 ####
+### Supplement S4, Plot community composition over T and beta, I_Cs = 15 ####
 
 #Import and fix data for the PCR line
 PCRLP_ICs15  <- readMat("Data/I_Cs_15/LP_LP_predaExclu(1).mat")
@@ -1004,11 +1004,10 @@ ICs15x$Bf <- factor(ICs15x$Bf, levels = c("CR", "PR", "PCR","PCRPR"))
 Ip1_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(1).mat")
 Ip2_ICs15 <- readMat("Data/I_Cs_15/BP_LP_predInva(2).mat")
 Ip_ICs15 <- as.data.frame(rbind(t(Ip1_ICs15$x[5:6,]),t(Ip2_ICs15$x[5:6,]))) # the stable and unstable coexistence
-Ip_ICs15$T <- Ip_ICs15$T-292
 colnames(Ip_ICs15) <- c("T","Beta")
 
 # beta-Temp plot
-pdf("MS1_AppendixA4.pdf", width = 5, height = 4)
+pdf("MS1_SupplementS4.pdf", width = 5, height = 4, useDingbats=FALSE)
 ICs15x %>% 
   filter(T < 305 && T > 274) %>%
   mutate(T = T-292) %>%

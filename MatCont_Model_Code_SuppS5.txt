@@ -42,5 +42,4 @@ if(Nu_Pj>0), matexp = 1 - u_P(1) / Nu_Pj(1); matswitch = heaviside(tolzero - mat
 Rc' = del*r_del*(K*r_K-Rc) - Int_Cs*Cs - Int_Pj*Pj - Int_Pa_Rc*Pa  
 Pj' = Nu_p_Pa*Pa + Nu_Pj*Pj - mat_rate*Pj - u_P*Pj  
 Pa' = mat_rate*Pj + Nu_Pa*Pa - Nu_p_Pa*Pa - u_P*Pa             
-Cs' = Nu_Cs*Cs - u_Cs*Cs - Int_Pa_Cs*Pa                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                          
+Cs' = Nu_Cs*Cs - u_Cs*Cs - Int_Pa_Cs*Pa                                                                                                                                                                                         
